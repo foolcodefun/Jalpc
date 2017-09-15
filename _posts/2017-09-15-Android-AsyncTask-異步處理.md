@@ -4,7 +4,7 @@ title:  "Android AsynTask 異步處理"
 date:   2017-09-15
 desc: "3 Steps (2 minutes) to Setup Your Personal Website with Jalpc"
 keywords: "Android,AsynTask,異步處理"
-categories: [Adroid]
+categories: [Android]
 tags: [Android,AsynTask]
 icon: icon-html
 ---
