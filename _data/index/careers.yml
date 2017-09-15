@@ -1,29 +1,58 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
-    detail: Company A
-    i18n: company_a
+    detail: 國立臺灣海洋大學
+    i18n:
   desc:
-    detail: I worked at Company A ...
+    detail: 就讀海大通訊與導航工程學系。
     i18n: company_a_desc
   date:
-    detail: Apr. 2016
+    detail: Sep. 2011
     i18n: company_a_date
   job:
-    detail: CTO
+    detail: 學生
     i18n: company_a_job
   icon: fa-plus-square
 
 - name:
-    detail: Company B
+    detail: 勤崴科技
     i18n: company_b
   desc:
-    detail: I worked at Company B ...
+    detail: Android程式與後端API串接。
     i18n: company_b_desc
   date:
-    detail: Jun. 2015
+    detail: Jul. 2014
     i18n: company_b_date
   job:
-    detail: Full Stack Developer
+    detail: Android 程式開發
     i18n: company_b_job
   icon: fa-plus-square
+  
+- name:
+    detail: 成功大學
+    i18n: company_b
+  desc:
+    detail: 就讀成功大學系統與船舶機電工程所。
+    i18n: company_b_desc
+  date:
+    detail: Sep. 2015
+    i18n: company_b_date
+  job:
+    detail: 學生
+    i18n: company_b_job
+  icon: fa-plus-square
+  
+- name:
+    detail: 科技部工程中心
+    i18n: company_b
+  desc:
+    detail: Asp.net網頁維護以及MSSQL資料串接。
+    i18n: company_b_desc
+  date:
+    detail: Apl. 2016
+    i18n: company_b_date
+  job:
+    detail: 兼職人員
+    i18n: company_b_job
+  icon: fa-plus-square
+
