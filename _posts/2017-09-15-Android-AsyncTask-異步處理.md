@@ -37,7 +37,7 @@ private class DownloadTask extends AsyncTask<Void, Void, Void> { ... }
 4. onPostExecute:doInBadkground結束後會將結果傳至此步驟，此步驟可將結果顯示於UI中。
 
 
-AsyncTask的使用須至少覆寫doInBackground，另外通常會搭配onPostExecute來呈現異步處理的結果。
+AsyncTask的使用須至少覆寫doInBackground，另外通常會搭配onPostExecute來呈現異步處理的結果。AsynTask通常會調用介面元件，因此以內部類別(subclass)的方式宣告。
 
 ```java
 private class DownloadTask extends AsyncTask<Integer, Integer, String> {
