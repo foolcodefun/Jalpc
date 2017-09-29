@@ -29,7 +29,7 @@ author:  # change following line to your infomation.
   desc:   <article><h2>Yen</h2>畢業於國立成功大學系統與船舶機電工程學系碩士班和國立海洋大學通訊與導航功程學系大學部。積極接觸各種程式語言，選修Java軟體設計、資料結構、程式設計、物件導向、微處理系統、嵌入式應用程式設計和行動裝置程式設計等課程。<hr><h2>大學時期</h2><li>大二加入校園app開發團隊，開始熟悉android。</li><li>大三暑期時學生到勤威國際科技實習，工作內容為android  APP的撰寫。期間學習連接後端API以及高德地圖API的使用。</li><hr><h2>研究所時期</h2><li>執行計畫，利用C#應用程式將AIS盒子的訊號儲存到後端伺服器資料庫，並將資料庫資料呈現於地圖上。其中用到PHP(XAMPP)、Google  Map  JavaScript  API和C#。</li><li>科技部工程中心擔任兼職人員，工作為網頁維護以及新增網頁功能。使用的語言是ASP.net，資料庫系統為MSSQL。</li><li>利用android撰寫一折線圖，可即時取得資料庫資料並呈現於手機上。其中用到PHP(XAMPP)。</li></article>  # Describe yourself.
 # comment
 disqus:  # if you wanna comment feature, go to https://disqus.com/ to get your configuration; if not, comment following two lines.
-  name: jalpc
+  name: foolcodefun
 
 # analytics
 ## google analytics
