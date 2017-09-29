@@ -16,9 +16,9 @@ icon: icon-html
 <img src="{{ site.img_path }}/20170929/基本ListView.png" width="30%">
 
 ## Adapter 簡介
-ListView 是 AdatpterView 的次類別，作為資料的容器需要一個能為之處理資料以及畫面的 [ListAdapter](https://developer.android.com/reference/android/widget/ListAdapter.html)。在 [Android Developers](https://developer.android.com/reference/android/widget/Adapter.html) 介紹中可知 Adatper 是作為 [AdapterView](https://developer.android.com/reference/android/widget/AdapterView.html) 與資料間的橋樑，它能為每一筆資料製作一個畫面 ( View )。而常見 [ListAdapter](https://developer.android.com/reference/android/widget/ListAdapter.html) 的次類別有 ArrayAdapter、CursorAdapter、SimpleAdapter、SimpleCursorAdapter 和 BaseAdapter，其繼承關係如下圖所示。
+ListView 是 AdatpterView 的次類別，作為資料的容器需要一個能為之處理資料以及畫面的 [ListAdapter](https://developer.android.com/reference/android/widget/ListAdapter.html)。在 [Android Developers](https://developer.android.com/reference/android/widget/Adapter.html) 介紹中可知 Adatper 是作為 [AdapterView](https://developer.android.com/reference/android/widget/AdapterView.html) 與資料間的橋樑，它能為每一筆資料製作一個畫面 ( View )。而常見 [ListAdapter](https://developer.android.com/reference/android/widget/ListAdapter.html) 的次類別有 ArrayAdapter、CursorAdapter、SimpleAdapter、SimpleCursorAdapter 和 BaseAdapter。
 
-<img src="{{ site.img_path }}/20170929/AdSt.png" width="30%">
+<img src="{{ site.img_path }}/20170929/AdpLVD.png" width="30%">
 
 ### 常見 ListAdapter 次類別的使用時機
 
@@ -27,9 +27,9 @@ ListView 是 AdatpterView 的次類別，作為資料的容器需要一個能為
 >3. SimpleCursorAdapter：輸入資料是由資料庫 ( SQLite ) 查詢的Cursor時。
 >4. BaseAdapter：需完整的客製化 ( custom )。
 
-看到這裡我們可以發現 ListView 和資料源之間使用 ListAdapter 進行資料轉接的行為正是設計模式 ( Design Pattern ) 中的轉接器模式 ( Adapter Pattern )，也稱作適配器模式。轉接器模式可使不相容的介面互相合作，而ListAdapter的目標就是將資料員轉成ListView的形式且串在一個ListView需要的畫面 ( View )。
+繼承關係圖
 
-<img src="{{ site.img_path }}/20170929/AdpLVD.png" width="30%">
+<img src="{{ site.img_path }}/20170929/AdSt.png" width="30%">
 
 ---------------------------------------
 
