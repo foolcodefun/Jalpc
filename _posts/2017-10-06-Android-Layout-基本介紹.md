@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Android Layout 基本介紹以及客製化"
+title:  "Android Layout 基本介紹"
 date: 2017-10-06
 desc: "Layout 基本介紹"
 keywords: "Android, ListView, Layout"
