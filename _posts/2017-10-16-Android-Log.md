@@ -1,0 +1,290 @@
+---
+layout: post
+title:  "Java logging API"
+date: 2017-10-16
+desc: "Layout 基本介紹"
+keywords: "Java, Log"
+categories: [Java]
+tags: [Java,Log]
+icon: icon-html
+---
+
+# 前言簡介
+
+日誌是在軟體系統執行時需記錄下的事件，像是捕捉例外事件後，部分例外需顯示警告於畫面用以提醒軟體使用者，另一些例外則以日誌的形式記錄下來提供開發人員。Java SE 中的 Java Logging API 是用來記錄日誌的，開發團隊、系統管理員或維護工程師可透過分析日誌來開發、除錯或維護軟體系統。日誌的記錄得考量需記錄的資料 ( 時間、 安全故障、Bug 訊息...... )、記錄的格式 ( 純文字、XML...... ) 及記錄的方式 ( Ram、文件、資料庫、遠端主機...... )。本篇文章介紹由java.util.logging 套件提供的 Java Logging ( 日誌 )  API，介紹此 API 的使用方法前需先認識其運作圖，下圖為 Logging API 的運作圖。
+
+<img src="{{ site.img_path }}/20171013/loggingWorks.png" width="40%"/>
+
+Logger 類別是日誌的起點，Logger 會將獲得的訊息資料轉為 LogRecord 而 Logger 的 Filter 會依照 Level 過濾訊息，若訊息可通過則將 LogRecord 交給 Handler，Handler 會決定如何輸出 ，而 Handler 的 Filter 也會依照 Level 決定是否將訊息交由 Formatter 進行訊息格式化。在Logging API 的功能分配上可看出 Logger 是所有日誌的起點，Handler 負責輸出 ( publish )，Formatter 負責格式化 ( format ) 而 Fitler 會依照 Level 過濾訊息。
+
+
+<!--設計模式是責任鍊模式 又稱 職責練模式 Chain of Responsibility
+職責練繼承圖-->
+
+# 基本使用方法
+
+記錄日誌最常見的方式是在每個類別中創建一個 Logger，且 Logger 通常宣告成 private、static and final。在 [Oracle 文件中](https://docs.oracle.com/javase/7/docs/api/java/util/logging/Logger.html#getLogger(java.lang.String))可知道 `getLogger(String name)` 會新增或尋找一個符合 name 的 Logger，Logger 基本宣告的方法如下：
+
+```java
+public class LoggerDemo {
+
+    private static final Logger logger =
+        Logger.getLogger(LoggerDemo.class.getName());
+
+}
+```
+
+而 Logger 的基本用法如下：
+
+```java
+logger.log(Level.SEVERE, "Severe message!");
+```
+
+以 ConsoleHandler 為例，Logger 在呼叫  `Log()` 方法時 Logger 的 `isLoggable(Level level)` 方法會依據判定是否過濾訊息，若其回傳為 true 則會看看 Logger 是否有實作 Filter 且 Filter 的 `isLoggable(LogRecord record)` 是否為 true，若有實作 Filter 且  `isLoggable(LogRecord record)` 是否為 false 則結束動作，其他則呼叫 ConsoleHandler 的 `publish()` 方法。在 `publish()` 方法中，首先會判斷 ConsoleHandler 的 `isLoggable(LogRecord record)` 回傳的布林值為何，若為false則結束動作，若為 true 則依據 Formatter 的 format 方法格式化訊息在輸出。
+
+# Logger 階層
+
+透過上段敘述可知 Logger 需藉由 `getLogger(String name)` 方法取得，而此方法會將對應的名稱空間以"."作為階層區分。以下將舉一個例子說明：
+
+```java
+Logger logger  = Logger.getLogger("com.foolcodefun.logweb");
+```
+上述程式碼中，其 logger 父子關係如下圖，而 Logger 可用 `getParent()` 方法取得其父 Logger。
+
+<img src="{{ site.img_path }}/20171013/LoggerHierarchy.png" width="25%"/>
+
+接著列出三段程式碼及其執行結果供讀者理解父子之間的關係
+
+第一段程式碼如下：
+
+```java
+import java.util.logging.*;
+
+public class HelloWorld{
+
+    public static void main(String []args){
+        Logger logger = Logger.getLogger("");
+	    Logger loggerA = Logger.getLogger("a");
+	    Logger loggerA_B = Logger.getLogger("a.b");
+
+	    loggerA.addHandler(new ConsoleHandler());
+	    loggerA_B.addHandler(new ConsoleHandler());
+
+	    logger.info("msg:");
+	    loggerA.info("msg: A");
+	    loggerA_B.info("msg: A.B");
+	}
+}
+```
+
+其輸出如下：
+
+```
+Oct 16, 2017 8:13:48 AM java.util.logging.LogManager$RootLogger log
+INFO: msg:
+Oct 16, 2017 8:13:48 AM HelloWorld main
+INFO: msg: A
+Oct 16, 2017 8:13:48 AM HelloWorld main
+INFO: msg: A
+Oct 16, 2017 8:13:48 AM HelloWorld main
+INFO: msg: A.B
+Oct 16, 2017 8:13:48 AM HelloWorld main
+INFO: msg: A.B
+Oct 16, 2017 8:13:48 AM HelloWorld main
+INFO: msg: A.B
+```
+
+第二段程式碼如下：
+
+```java
+import java.util.logging.*;
+
+public class HelloWorld{
+
+    public static void main(String []args){
+        //Logger logger = Logger.getLogger("");
+	    Logger loggerA = Logger.getLogger("a");
+	    Logger loggerA_B = Logger.getLogger("a.b");
+
+	    loggerA.addHandler(new ConsoleHandler());
+	    loggerA_B.addHandler(new ConsoleHandler());
+
+	    //logger.info("msg:");
+	    loggerA.info("msg: A");
+	    loggerA_B.info("msg: A.B");
+	}
+}
+```
+
+其輸出如下：
+
+```
+Oct 16, 2017 8:14:59 AM HelloWorld main
+INFO: msg: A
+Oct 16, 2017 8:14:59 AM HelloWorld main
+INFO: msg: A
+Oct 16, 2017 8:14:59 AM HelloWorld main
+INFO: msg: A.B
+Oct 16, 2017 8:14:59 AM HelloWorld main
+INFO: msg: A.B
+Oct 16, 2017 8:14:59 AM HelloWorld main
+INFO: msg: A.B
+```
+
+第三段程式碼如下：
+
+```java
+import java.util.logging.*;
+
+public class HelloWorld{
+
+    public static void main(String []args){
+        Logger logger = Logger.getLogger("");
+	    Logger loggerA = Logger.getLogger("a");
+	    Logger loggerA_B = Logger.getLogger("a.b");
+
+	    /*loggerA.addHandler(new ConsoleHandler());
+	    loggerA_B.addHandler(new ConsoleHandler());*/
+
+	    logger.info("msg:");
+	    loggerA.info("msg: A");
+	    loggerA_B.info("msg: A.B");
+	}
+}
+```
+
+其輸出如下：
+
+```
+Oct 16, 2017 8:16:15 AM java.util.logging.LogManager$RootLogger log
+INFO: msg:
+Oct 16, 2017 8:16:15 AM HelloWorld main
+INFO: msg: A
+Oct 16, 2017 8:16:15 AM HelloWorld main
+INFO: msg: A.B
+```
+
+
+# Log Level
+
+Log Level 是 Logger 中的 Filter用來過濾訊息的基準，Logger 可透過 `setLevel(Level newLevel)` 來改變訊息可通過的層級，以下介紹幾個可使用的靜態成員。
+
+> Level.OFF (Integer.MAX_VALUE)
+>
+> Level.SEVERE (100)
+>
+> Level.WARNING (900)
+>
+> Level.INFO (800)
+>
+> Level.CONFIG (700)
+>
+> Level.FINE (500)
+>
+> Level.FINER (400)
+>
+> Level.FINEST (300)
+>
+> Level.ALL (Integer.MIN_VALUE)
+
+
+使用方法如下：
+
+```java
+logger.setLevel(Level.WARNING);
+```
+
+這代表大於等於 WARNING 的 Level 可通過，其他則否。
+
+除此以外，Logger 類別還提供了 `server(String msg)`、`warning(String msg)`、`info(String msg)`、`config(String msg)`、`fine(String msg)`、`finer(String msg)` 和 `finest(String msg)` 等方法輸出訊息。
+
+
+# Handlers 和 Formatters
+
+在 Logger 中可擁有一個或多個 Handler，而 Handler 掌管著資料的輸出，他會接收 Logger 傳算進來的訊息並決定輸出的方式，`setLevel( Level.off )` 可關閉 Handler。Java Logging API 提供了幾個標準的 Handler，其繼承圖如下：
+
+<img src="{{ site.img_path }}/20171013/Handler.png" width="40%"/>
+
+MemoryHandler 會直接將資料丟到記憶體緩衝區，其使用成本較低，因為它可省去格式化系統消耗的成本。而資料會在滿足設定條件後才會將資料儲存於target Handler。ConsoleHandler、FileHandler 和 SocketHandler 都繼承於 StreamHandler，資料會透過串流分別顯示於控制台、儲存於文件或寫入Socket接口。若要在
+Logger 中新增一個 Handler 則使用 `addHandler(Handler hdl)` 方法，移除則使用 `removeHandler(Handler hdl)`。
+
+Formatter 會將傳入 Handler 資料格式化，就是在資料輸出至特定系統前將資料編排成特定格式。標準 Handler 中，FileHandler 和 SocketHandler 使用的是 XMLFormatter 而 ConsoleHandler 和 StreamHandler 使用的是 SimpleFormatter。XMLFormatter 輸出的是 XML 格式的日誌，而 SimpleFormatter 輸出的是文字格式的日誌。Handler 可用 `setFormatter(Formatter fmt)` 來設定日誌的格式。以下為自定義 Formatter 簡易的範例。
+
+```java
+public class CustomFormatter extends Formatter {
+    @Override
+    public String format(LogRecord record) {
+        return record.getLevel() + ":" + record.getMessage();
+    }
+}
+```
+
+# 自定義 Formatter 範例
+
+## MyFommater類別
+
+```java
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.*;
+class MyFormatter extends Formatter {
+    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+
+    public String format(LogRecord record) {
+        StringBuilder builder = new StringBuilder(1000);
+        builder.append(df.format(new Date(record.getMillis()))).append(" - ");
+        builder.append("[").append(record.getSourceClassName()).append(".");
+        builder.append(record.getSourceMethodName()).append("] - ");
+        builder.append("[").append(record.getLevel()).append("] - ");
+        builder.append(formatMessage(record));
+        builder.append("\n");
+        return builder.toString();
+    }
+
+    public String getHead(Handler h) {
+        return super.getHead(h);
+    }
+
+    public String getTail(Handler h) {
+        return super.getTail(h);
+    }
+}
+```
+
+
+
+## 自定義 Formatter 的使用
+
+```java
+import java.util.logging.*;
+public class HelloWorld
+{
+  public static void main(String[] args)
+  {
+        Logger logger = Logger.getLogger(HelloWorld.class.getName());
+
+        MyFormatter formatter = new MyFormatter();
+        for (Handler handler : logger.getParent().getHandlers()) {
+            handler.setFormatter(formatter);
+        }
+        
+        logger.info("This is an info.");
+        logger.warning("This is a warning.");
+        logger.severe("This is a severe.");
+  }
+}
+
+```
+
+## 輸出結果
+```
+16/10/2017 12:09:50.480 - [HelloWorld.main] - [INFO] - This is an info.
+16/10/2017 12:09:50.482 - [HelloWorld.main] - [WARNING] - This is a warning.
+16/10/2017 12:09:50.482 - [HelloWorld.main] - [SEVERE] - This is a severe.
+```
+
+
+
+
+
