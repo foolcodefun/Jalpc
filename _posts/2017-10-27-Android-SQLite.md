@@ -149,7 +149,7 @@ Cursor cursor = helper.getReadableDatabase().query(
 
 # 四、範例
 
-本範例參考[綠豆湯](https://litotom.com/2016/05/09/android%E9%AB%98%E6%95%88%E5%85%A5%E9%96%80-sqlite%E8%B3%87%E6%96%99%E5%BA%AB/)內容和[Android 官方教學](https://developer.android.com/training/basics/data-storage/databases.html)，此範例與差別主要在於[綠豆湯][綠豆湯](https://litotom.com/2016/05/09/android%E9%AB%98%E6%95%88%E5%85%A5%E9%96%80-sqlite%E8%B3%87%E6%96%99%E5%BA%AB/) 使用 SimpleCursorAdapter 而本篇文章對使用 CursorAdapter。
+本範例參考[綠豆湯](https://litotom.com/2016/05/09/android%E9%AB%98%E6%95%88%E5%85%A5%E9%96%80-sqlite%E8%B3%87%E6%96%99%E5%BA%AB/)內容和[Android 官方教學](https://developer.android.com/training/basics/data-storage/databases.html)，此範例與差別主要在於[綠豆湯](https://litotom.com/2016/05/09/android%E9%AB%98%E6%95%88%E5%85%A5%E9%96%80-sqlite%E8%B3%87%E6%96%99%E5%BA%AB/) 使用 SimpleCursorAdapter 而本篇文章對使用 CursorAdapter。
 
 ## 1. 程式碼
 
