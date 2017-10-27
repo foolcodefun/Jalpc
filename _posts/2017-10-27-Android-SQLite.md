@@ -12,7 +12,7 @@ icon: icon-html
 # 一、前言簡介
 
 在 Android App 開發中儲存資料是必要的行為，而資料可透過 Internal Storage、External Storage、SharedPreferences、SQLite 或 Server 等方法儲存。
-Internal Storage 的資料儲存於手機內部記憶體，其資料為資料，只有該 app 可使用其儲存的資料，資料會隨著 app 刪除而清除；External Storage 資料儲存於手機外部記憶體，資料為公有的，可透過 USB 將資料傳輸到電腦；SharedPreferences 的資料以鍵值對儲存，當 app 刪除時，資料透過 user sessions 儲存；SQLite 資料儲存於資料故的資料表中，只有該 app 可存取該資料庫的資料，資料會隨著 app 刪除而清除；Server 資料儲存於遠端的網路主機 ，適用於大量資料的儲存。
+Internal Storage 的資料儲存於手機內部記憶體，其資料為資料，只有該 app 可使用其儲存的資料，資料會隨著 app 刪除而清除；External Storage 資料儲存於手機外部記憶體，資料為公有的，可透過 USB 將資料傳輸到電腦；SharedPreferences 的資料以鍵值對儲存，當 app 刪除時，資料透過 user sessions 儲存；SQLite 資料儲存於資料庫的資料表中，只有該 app 可存取該資料庫的資料，資料會隨著 app 刪除而清除；Server 資料儲存於遠端的網路主機 ，適用於大量資料的儲存。本篇文章將針對 SQLite 說明。
 
 # 二、SQLite 基本介紹
 
@@ -118,11 +118,12 @@ public class FinDBHelper extends SQLiteOpenHelper {
 FeedReaderDbHelper helper = new FeedReaderDbHelper(Context);
 ```
 
-## 2. 資料的基本操作 (查寫刪數據等)
+## 2. 資料的基本操作
 
 ### (1) 新增資料到資料庫中
 
 ```java
+FinDBHelper helper = new FinDBHelper(this);
 SQLiteDatabase db = helper.getWritableDatabase();
 
 // Create a new map of values, where column names are the keys
@@ -130,9 +131,8 @@ ContentValues values = new ContentValues();
 values.put(FinDBHelper.FeedEntry.COLUMN_NAME_DATE, date.getText().toString());
 values.put(FinDBHelper.FeedEntry.COLUMN_NAME_INFO, info.getText().toString());
 values.put(FinDBHelper.FeedEntry.COLUMN_NAME_COST, cost.getText().toString());
-// Insert the new row, returning the primary key value of the new row
-long newRowId;
-newRowId = db.insert(
+// Insert the new row,
+long newRowId = db.insert(
         FinDBHelper.FeedEntry.TABLE_NAME,
         null,
         values);
@@ -149,9 +149,11 @@ Cursor cursor = helper.getReadableDatabase().query(
 
 # 四、範例
 
+本範例參考[綠豆湯](https://litotom.com/2016/05/09/android%E9%AB%98%E6%95%88%E5%85%A5%E9%96%80-sqlite%E8%B3%87%E6%96%99%E5%BA%AB/)內容和[Android 官方教學](https://developer.android.com/training/basics/data-storage/databases.html)，此範例與差別主要在於[綠豆湯][綠豆湯](https://litotom.com/2016/05/09/android%E9%AB%98%E6%95%88%E5%85%A5%E9%96%80-sqlite%E8%B3%87%E6%96%99%E5%BA%AB/) 使用 SimpleCursorAdapter 而本篇文章對使用 CursorAdapter。
+
 ## 1. 程式碼
 
-MainActivity.java
+在 MainActivity.java 中透過 ListView 顯示 SQLite 資料庫中的資料。
 
 ```java
 package com.example.sarah.testsqlite;
@@ -222,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-FinDBHelper.java
+在 FinDBHelper.java 繼承 SQLiteOpenHelper，用以創建或刪除資料庫，且將資料表個欄位結構透過 BaseColumns 的實作實現。
 
 ```java
 package com.example.sarah.testsqlite;
@@ -281,7 +283,7 @@ public class FinDBHelper extends SQLiteOpenHelper {
 
 ```
 
-FinCursorAdapter.java
+FinCursorAdapter.java 是繼承 CursorAdapter 的類別，是作為 ListView 與 Cursor 資料的轉接器。
 
 ```java
 package com.example.sarah.testsqlite;
@@ -349,7 +351,7 @@ public class FinCursorAdapter extends CursorAdapter {
 
 ```
 
-AddFinActivity.java
+在 AddFinActivity.java 將想儲存的資料插入資料庫中。
 
 ```java
 package com.example.sarah.testsqlite;
@@ -412,7 +414,7 @@ public class AddFinActivity extends AppCompatActivity {
 
 ```
 
-activity_main.xml
+activity_main.xml 是主畫面。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -452,7 +454,7 @@ activity_main.xml
 
 ```
 
-content_main.xml
+content_main.xml 中的 ListView 用以顯示資料庫中的所有資料。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -482,7 +484,7 @@ content_main.xml
 
 ```
 
-fin_lv_item.xml
+fin_lv_item.xml 是 ListView 中每一列的資料畫面排版。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -517,7 +519,7 @@ fin_lv_item.xml
 </LinearLayout>
 ```
 
-activity_add_fin.xml
+activity_add_fin.xml 是新增資料的畫面。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -646,8 +648,6 @@ activity_add_fin.xml
 下週將會詳細介紹 ListView、CursorAdapter 結合 SQLite 的應用範例。
 
 ## 參考資料
-
-[簡書 KCrason](http://www.jianshu.com/p/e930df303ebd)
 
 [Android 官方教學](https://developer.android.com/training/basics/data-storage/databases.html)
 
