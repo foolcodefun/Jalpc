@@ -644,9 +644,6 @@ activity_add_fin.xml 是新增資料的畫面。
 <img src="{{ site.img_path }}/20171027/SQLite6.png" width="40%"/>
 
 
-
-下週將會詳細介紹 ListView、CursorAdapter 結合 SQLite 的應用範例。
-
 ## 參考資料
 
 [Android 官方教學](https://developer.android.com/training/basics/data-storage/databases.html)
