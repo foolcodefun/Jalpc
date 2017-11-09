@@ -1,22 +1,48 @@
 ---
 layout: post
 title:  "Android The Activity Lifecycle"
-date: 2017-11-10
+date: 2017-11-09
 desc: "Android Lifecycle"
 keywords: "Android, Lifecycle"
 categories: [Android]
 tags: [Android,Lifecycle]
 icon: icon-html
 ---
+# 目錄
+
+
+* ### [一、前言簡介](#1)
+* ### [二、Activity 的四個狀態](#2)
+> ### [nonexistent](#2)
+> ### [stopped](#2)
+> ### [paused](#2)
+> ### [running](#2)
+* ### [三、使用者操作行為與生命週期的關係](#3)
+> ### [1. 開啟 App](#3.1)
+> ### [2. 按返回鍵](#3.2)
+> ### [3. 按 Home 鍵](#3.3)
+> ### [4. 按 Recents 鍵](#3.4)
+> ### [5. 旋轉螢幕](#3.5)
+
+<h2 id="1"></h2>
+* ### [四、螢幕旋轉時資料遺失的解決方法](#4)
+> ### [onSaveInstanceState 方法](#4.1)
+> ### [禁止螢幕旋轉](#4.2)
+
 
 # 一、前言簡介
-認識 Activity 生命週期 (Lifecycle) 可以幫助開發者掌握 Activity 的狀態並且當著開發，本章節將會對 Activity 生命週期的四個狀態 (running、paused、stopped 和 nonexistent) 、七個生命週期方法 (onCreate()、onStart()、onResume()、onPause()、onStop()、onRestart() 和 onDestroy()) 以及使用者操作行為與生命週期的關係做詳細說明。
+認識 Activity 生命週期 (Lifecycle) 可以幫助開發者掌握 Activity 的狀態，本章節將會對 Activity 生命週期的四個狀態 (running、paused、stopped 和 nonexistent) 、七個生命週期方法 (onCreate()、onStart()、onResume()、onPause()、onStop()、onRestart() 和 onDestroy()) 以及使用者操作行為與生命週期的關係做詳細說明。
 
 <img src="{{ site.img_path }}/20171110/lifecycle.png" width="100%" style="min-width:450px;max-width:600px;"/>
 
+<h2 id="2"></h2>
+
+上圖為 Activity 的生命週期圖，資料來源為 [Android 官方網站](https://developer.android.com/guide/components/activities/activity-lifecycle.html)
 
 # 二、Activity 的四個狀態
 本段文章將介紹 Activity 的四個工作狀態，並說明是否佔用記憶體、可被看見以及位於前景。
+
+<h2 id="3"></h2>
 
 > nonexistent：在此狀態 Activity 並不存在、無法被看見且不佔用記憶體容量。
 >
@@ -25,6 +51,7 @@ icon: icon-html
 > paused：當 Toast、AlertDialog 或電話來時，Activity 被遮住或呈半透明狀態時使用者不能對其進行操作，但可能被看見且佔有手機記憶體。
 >
 > running：此狀態是可被看見的且使用者正聚焦於此 Activity，意為著 Activity 位於前景的狀態，此時佔有部分記憶體。
+
 
 # 三、使用者操作行為與生命週期的關係
 
@@ -98,11 +125,15 @@ public class MainActivity extends AppCompatActivity {
 
 <img src="{{ site.img_path }}/20171110/logcat.png" width="100%" style="min-width:600px;max-width:1000px;"/>
 
+<h2 id="3.1"></h2>
+
 <img src="{{ site.img_path }}/20171110/logcatfilter.png" width="100%" style="min-width:300px;max-width:450px;"/>
 
 ## 1. 開啟 App
 
 開啟 App 後 Logcat 會跑出以下訊息，此時 Activity 處於 running 的狀態。
+
+<h2 id="3.2"></h2>
 
 ```
 11-08 20:43:57.723 2655-2655/com.example.sarah.testlifecycle D/MainActivity: onCreate
@@ -114,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
 
 當 App 開啟後再按下返回鍵會跑出以下訊息，此時是 nonexistent 的狀態，因為返回鍵代表著使用者不在需要執行此 Activity。
 
+<h2 id="3.3"></h2>
+
 ```
 11-08 20:53:53.229 11843-11843/com.example.sarah.testlifecycle D/MainActivity: onPause
 11-08 20:53:53.647 11843-11843/com.example.sarah.testlifecycle D/MainActivity: onStop
@@ -124,10 +157,13 @@ public class MainActivity extends AppCompatActivity {
 
 當 App 已經開啟後再按下 Home 鍵會跑出以下訊息，按下 Home 鍵代表著使用者暫時去看別的東西但可能還會回來，此時 Activity 處於 stopped的狀態。
 
+<h2 id="3.4"></h2>
+
 ```
 11-08 20:48:31.850 2655-2655/com.example.sarah.testlifecycle D/MainActivity: onPause
 11-08 20:48:31.875 2655-2655/com.example.sarah.testlifecycle D/MainActivity: onStop
 ```
+
 
 ## 4. 按 Recents 鍵
 
@@ -154,6 +190,8 @@ public class MainActivity extends AppCompatActivity {
 
 當 App 按下 返回鍵之後按下 Recents 再打開 App 會跑出以下訊息，此時就會執行 `onCreate` 方法。
 
+<h2 id="3.5"></h2>
+
 ```
 11-08 21:33:25.849 2607-2607/com.example.sarah.testlifecycle D/MainActivity: onCreate
 11-08 21:33:25.851 2607-2607/com.example.sarah.testlifecycle D/MainActivity: onStart
@@ -163,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
 ## 5. 旋轉螢幕
 
 旋轉螢幕時，程式會將原本的 Activity 狀態全部摧毀再重新打開，如下。這會產生資料遺失的問題，下一章節將會詳細介紹問題以及解決的方法。
+
+<h2 id="4"></h2>
 
 ```
 11-08 20:51:47.647 2655-2655/com.example.sarah.testlifecycle D/MainActivity: onPause
@@ -175,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
 # 四、螢幕旋轉時資料遺失的解決方法
 
-當螢幕選轉時，生命週會完全再進入一個新的生命週期，這會使原本執行時的資料消失。如以下兩張圖。
+當螢幕選轉時，生命週會完全再進入一個新的生命週期，這會使原本執行時的資料消失，如以下兩張圖。
 
 按了十三次 Plus One 按鈕後如下圖。
 
@@ -295,11 +335,13 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
+<h2 id="4.1"></h2>
+
 要解決上述問題有兩種方法，一是利用 onSaveInstanceState 方法記錄下數值，另一個是禁止螢幕旋轉，以下是兩種方法詳細的介紹。
 
 ## 1. onSaveInstanceState 方法
 
-程式修改的部分有 `onCreate` 方法、 新增 `onSaveInstanceState`方法還有全域變數，如以下程式。
+利用 onSaveInstanceState 方法和 Bundle 儲存當下的狀態可以解決資料遺失的問題。其程式修改的部分有 `onCreate` 方法、 新增 `onSaveInstanceState`方法還有全域變數，如以下程式。
 
 ```java
 package com.example.sarah.testlifecycle;
@@ -468,6 +510,8 @@ cp app/src/main/res/layout/activity_main.xml app/src/main/res/layout-land
 ```
 
 (6) 新的水平螢幕版面配置如下
+
+<h2 id="4.2"></h2>
 
 <img src="{{ site.img_path }}/20171110/screenland.png" width="100%" style="min-width:500px;max-width:600px;"/>
  
