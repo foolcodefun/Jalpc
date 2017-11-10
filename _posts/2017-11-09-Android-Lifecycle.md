@@ -48,7 +48,7 @@ icon: icon-html
 >
 > stopped：此狀態 Activity 已被其他 Activity 覆蓋，它無法被看見但還是佔用著記憶體。
 >
-> paused：當 Toast、AlertDialog 或電話來時，Activity 被遮住或呈半透明狀態時使用者不能對其進行操作，但可能被看見且佔有手機記憶體。
+> paused：當 AlertDialog 或電話來時，Activity 被遮住或呈半透明狀態時使用者不能對其進行操作，但可能被看見且佔有手機記憶體。
 >
 > running：此狀態是可被看見的且使用者正聚焦於此 Activity，意為著 Activity 位於前景的狀態，此時佔有部分記憶體。
 
