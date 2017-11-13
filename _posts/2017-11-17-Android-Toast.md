@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Android Toast"
-date: 2017-11-09
+date: 2017-11-17
 desc: "Android Toast"
 keywords: "Android, Toast"
 categories: [Android]
