@@ -256,3 +256,7 @@ public class MainActivity extends AppCompatActivity {
 執行結果如下。
 
 <img src="{{ site.img_path }}/20171117/CustomToast.gif" width="100%" style="max-width:350px;"/>
+
+# 參考資料
+
+[Android Programing The Big Nerd Ranch Guide](https://www.bignerdranch.com/books/android-programming/)

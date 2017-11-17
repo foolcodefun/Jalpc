@@ -26,8 +26,8 @@ icon: icon-html
 
 <h2 id="1"></h2>
 * ### [四、螢幕旋轉時資料遺失的解決方法](#4)
-> ### [onSaveInstanceState 方法](#4.1)
-> ### [禁止螢幕旋轉](#4.2)
+> ### [1. onSaveInstanceState 方法](#4.1)
+> ### [2. 禁止螢幕旋轉](#4.2)
 
 
 # 一、前言簡介
@@ -543,5 +543,9 @@ cp app/src/main/res/layout/activity_main.xml app/src/main/res/layout-land
 
 </manifest>
 ```
+
+# 參考資料 
+
+[Android Programing The Big Nerd Ranch Guide](https://www.bignerdranch.com/books/android-programming/)
 
 本篇結束，歡迎各位讀者留言交流，感謝。
