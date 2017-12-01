@@ -544,6 +544,8 @@ cp app/src/main/res/layout/activity_main.xml app/src/main/res/layout-land
 </manifest>
 ```
 
+雖然可透過禁止螢幕旋轉來達到目的，但有的時候反而會影響到使用者對 App 的使用體驗，所以並不建議使用此方法。
+
 # 參考資料 
 
 [Android Programing The Big Nerd Ranch Guide](https://www.bignerdranch.com/books/android-programming/)
