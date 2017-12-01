@@ -173,7 +173,7 @@ answerIsTrue = getIntent().getBooleanExtra("ANSWER_IS_TRUE",false);
 
 <h2 id="2.2"></h2>
 
-##2. 透過 Bundle 傳遞資料給第二個 Activity法
+## 2. 透過 Bundle 傳遞資料給第二個 Activity法
 
 除了 Intent 也可利用 Bundle 在 Activities 傳送資料。Bundle 在傳送資料上有更大的彈性，此範例無法顯現以 Bundle 傳送資料的優勢，有興趣的讀者可研究研究。
 
