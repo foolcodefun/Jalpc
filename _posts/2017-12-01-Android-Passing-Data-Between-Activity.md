@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Android Activities 間傳送資料"
-date: 2017-11-24
+date: 2017-12-01
 desc: "Android Passing Data Between Activities"
 keywords: "Android, onActivityResult"
 categories: [Android]
@@ -136,7 +136,7 @@ activity_cheat.xml 程式碼
 
 <img src="{{ site.img_path }}/20171201/activity_cheat.png" width="100%" style="max-width:350px;"/>
 
-嗯哼，相信各位讀者看到這個 App 介面時都已經知道 1+1=3 是 TRUE 還是 FALSE 了，但是在下懇求各位大大裝作不知道然後按下 CHEAT 按鈕，接著會發現什麼事都沒發生。對！這就是本篇文章要撰寫 MainActivity 傳送答案資料給 CheatActivit 的地方。我們希望在按下 activity_main 的 CHEAT! 按鈕後，畫面會從 activity_main.xml 換到 activity_cheat.xml 且答案會從 MainActivity.java 傳送到 CheatActivit.java 並且會將。另外在 activity_cheat 畫面時，當使用者按下 SURE 按鈕後，答案會顯示在界面上並回傳使用者作弊的情報給 MainActivity。
+嗯哼，相信各位讀者看到這個 App 介面時都已經知道 1+1=3 是 TRUE 還是 FALSE 了，但是在下懇求各位大大裝作不知道然後按下 CHEAT 按鈕，接著會發現什麼事都沒發生。對！這就是本篇文章要撰寫 MainActivity 傳送答案資料給 CheatActivit 的地方。我們希望在按下 activity_main 的 CHEAT! 按鈕後，畫面會從 activity_main.xml 換到 activity_cheat.xml 且答案會從 MainActivity.java 傳送到 CheatActivit.java 。另外在 activity_cheat 畫面時，當使用者按下 SURE 按鈕後，答案會顯示在界面上並回傳使用者作弊的情報給 MainActivity。
 
 <h2 id="2"></h2>
 
@@ -205,13 +205,13 @@ answerIsTrue = bag.getBoolean("ANSWER_IS_TRUE");
 
 ## 1. 傳遞架構說明
 
-兩個 Activities 互相傳送資料的步驟分成三個，第一個是在 MainActivity.java 的 `startActivityForResult` 方法，第二個是在 CheatActivity.java 的 `setResult` 方法，而最後則是在當 App 回到中十 MainActivity.java 會自動呼叫 `onActivityResult` 方法，因此在此方法中撰寫取出資料的程式碼即可。
+兩個 Activities 互相傳送資料的步驟分成三個，第一個是在 MainActivity.java 的 `startActivityForResult` 方法，第二個是在 CheatActivity.java 的 `setResult` 方法，而最後則是在當 App 回到 MainActivity.java 時 會自動呼叫 `onActivityResult` 方法，因此在此方法中撰寫取出資料的程式碼即可。
 
 <h2 id="3.1.1"></h2>
 
 ### (1) startActivityForResult
 
-在 MainActivity.java 中若是需要接收回傳的資料就不可以用 startActivity 要用 startActivityForResult，接著到 SecondActivity setResult，最後再回到 MainActivity 將回傳的資料取出。
+在 MainActivity.java 中若是需要接收回傳的資料就不可以用 startActivity 要用 startActivityForResult。
 
 將 MainActivity.java 中 `cheat(View)` 方法內的程式碼改成以下。
 
@@ -225,7 +225,7 @@ startActivityForResult(intent,REQUEST_CODE_CHEAT);
 
 ### (2) setResult
 
-這個步驟則是 CheatActivity.java 回傳資料，這裡的想法是如果使用者按下 SURE 按鈕，代表使用者 cheat，所以要告訴 MainActivity 使用者已經 cheat 了。`showAnswer` 方法內的程式碼如下。
+這個步驟則是 CheatActivity.java 回傳資料，這裡的想法是如果使用者按下 SURE 按鈕，代表使用者 cheat，所以要告訴 MainActivity 使用者已經 cheat 了。`showAnswer(View)` 方法內的程式碼如下。
 
 ```java
 Intent intent= getIntent();
@@ -376,7 +376,7 @@ public class CheatActivity extends AppCompatActivity {
 
 Layout 和前言中的程式碼一樣。
 
-執行結果如下，可以發現看到答案後的回覆並不會夠素你的答案正確與否，反而會說作弊是不對的ＸＤＤＤ
+執行結果如下，可以發現偷看過答案後的回覆並不會是你的答案正確與否，反而會說作弊是不對的ＸＤＤＤ
 
 <img src="{{ site.img_path }}/20171201/exe.gif" width="100%" style="max-width:350px;"/>
 
@@ -539,7 +539,7 @@ public class CheatActivity extends AppCompatActivity {
 <h2 id="5"></h2>
 
 # 參考資料
-本篇文章參考 [Android Programing The Big Nerd Ranch Guide](https://www.bignerdranch.com/books/android-programming/) 的 Geoquiz 範例和[Android 官網](https://developer.android.com/reference/android/app/Activity.html#setResult(int))。
+本篇文章參考 [Android Programing The Big Nerd Ranch Guide](https://www.bignerdranch.com/books/android-programming/) 的 Geoquiz 範例和 [Android 官網](https://developer.android.com/reference/android/app/Activity.html#setResult(int))。
 
 本文結束，感謝各位讀者閱讀，歡迎各位讀者大大打屁聊天留言。
 
