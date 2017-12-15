@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Android Fragment 入門"
-date: 2017-12-13
+date: 2017-12-15
 desc: "Android Fragmetn"
 keywords: "Android, Fragment"
 categories: [Android]
@@ -23,9 +23,10 @@ icon: icon-html
 
 # 一、前言簡介
 
-Fragment 是 Android 3.0 (API 11) 推出的一個重大功能，主要功能可使 App 畫面在不同大小的螢幕上顯示時有不一樣的表現。以下圖為例，在小螢幕手機上所顯示的 A 畫面與 B 畫面是分開來的，但是在平板 (較大的螢幕) 上可使 A 畫面與 B 畫面同時顯示。Fragment 的重要性在於更彈性的設計使用介面，而 Fragment 的使用需由嵌入 Activity。
+Fragment 是 Android 3.0 (API 11) 推出的一個重大功能，主要功能可使 App 畫面在不同大小的螢幕上顯示時有不一樣的表現。以下圖為例，在小螢幕手機上所顯示的 A 畫面與 B 畫面是分開來的，但是在平板 (較大的螢幕) 上可使 A 畫面與 B 畫面同時顯示，如下圖所示，下圖取自 [Android 官網](https://developer.android.com/training/basics/fragments/index.html)。Fragment 的重要性在於更彈性的設計使用介面，而 Fragment 的使用需由嵌入 Activity。
 
-畫圖！！！！
+<img src="{{ site.img_path }}/20171215/Fragment.png" width="100%" style="max-width:800px;"/>
+
 
 <h2 id="2"></h2>
 
