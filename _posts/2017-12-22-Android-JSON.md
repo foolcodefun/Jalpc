@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViews();
         StringBuilder sb = readJSONData(R.raw.data);
-        Data data = getData(sb);
+        Data data = getData(sb.toString());
         setViewText(data.getArray(),
                     data.isBool(),
                     data.getSnull(),
@@ -417,11 +417,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private Data getData(StringBuilder sb){
+    private Data getData(String JSONString){
         JSONObject obj;
         Data data = null;
         try {
-            obj = new JSONObject(sb.toString());
+            obj = new JSONObject(JSONString);
             data = new Data(obj);
         } catch (JSONException e) {
             e.printStackTrace();
