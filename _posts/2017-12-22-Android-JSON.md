@@ -384,6 +384,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -401,35 +402,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViews();
-
-        try {
-            StringBuilder sb = readJSONData();
-
-            JSONObject obj = new JSONObject(sb.toString());
-            Data data = new Data(obj);
-
-            setViewText(data.getArray(),
+        StringBuilder sb = readJSONData();
+        Data data = getData(sb);
+        setViewText(data.getArray(),
                     data.isBool(),
                     data.getSnull(),
                     data.getNum(),
                     data.getItem(),
                     data.getS());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @NonNull
-    private StringBuilder readJSONData() throws IOException {
+    private Data getData(StringBuilder sb){
+        JSONObject obj = null;
+        Data data = null;
+        try {
+            obj = new JSONObject(sb.toString());
+            data = new Data(obj);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @NonNull
+    private StringBuilder readJSONData(){
         InputStream in = getResources().openRawResource(R.raw.data);
         BufferedReader rd = new BufferedReader(new InputStreamReader(in));
         String line;
         StringBuilder sb = new StringBuilder();
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
+        try {
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return sb;
     }
@@ -452,6 +459,7 @@ public class MainActivity extends AppCompatActivity {
         mTvString = findViewById(R.id.string);
     }
 }
+
 
 ```
 
