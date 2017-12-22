@@ -448,10 +448,10 @@ public class MainActivity extends AppCompatActivity {
     private void setViewText(JSONArray array, boolean bool, String snull, int num, JSONObject item, String s) {
         mTvArray.setText(mTvArray.getText() + array.toString());
         mTvBool.setText(mTvBool.getText() + String.valueOf(bool));
-        mTvNull.setText(mTvBool.getText() + String.valueOf(snull));
-        mTvNumber.setText(mTvBool.getText() + String.valueOf(num));
-        mTvObject.setText(mTvBool.getText() + item.toString());
-        mTvString.setText(mTvBool.getText() + s);
+        mTvNull.setText(mTvNull.getText() + String.valueOf(snull));
+        mTvNumber.setText(mTvNumber.getText() + String.valueOf(num));
+        mTvObject.setText(mTvObject.getText() + item.toString());
+        mTvString.setText(mTvString.getText() + s);
     }
 
     private void findViews() {
