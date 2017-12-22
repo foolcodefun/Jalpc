@@ -296,6 +296,9 @@ public class Data {
     JSONObject item ;
     String s ;
 
+    private Data() {
+    }
+
     public Data(JSONObject obj) throws JSONException {
         this(obj.getJSONArray("array"),
                 obj.getBoolean("boolean"),
@@ -363,6 +366,7 @@ public class Data {
     }
 }
 
+
 ```
 
 MainActivity.java
@@ -402,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViews();
-        StringBuilder sb = readJSONData();
+        StringBuilder sb = readJSONData(R.raw.data);
         Data data = getData(sb);
         setViewText(data.getArray(),
                     data.isBool(),
@@ -414,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
 
     @NonNull
     private Data getData(StringBuilder sb){
-        JSONObject obj = null;
+        JSONObject obj;
         Data data = null;
         try {
             obj = new JSONObject(sb.toString());
@@ -426,8 +430,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private StringBuilder readJSONData(){
-        InputStream in = getResources().openRawResource(R.raw.data);
+    private StringBuilder readJSONData(int res){
+        InputStream in = getResources().openRawResource(res);
         BufferedReader rd = new BufferedReader(new InputStreamReader(in));
         String line;
         StringBuilder sb = new StringBuilder();
@@ -459,7 +463,6 @@ public class MainActivity extends AppCompatActivity {
         mTvString = findViewById(R.id.string);
     }
 }
-
 
 ```
 
