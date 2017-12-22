@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Android Studio Debug"
-date: 2017-11-17
+date: 2017-12-19
 desc: "Android Debug"
 keywords: "Android, Debug"
 categories: [Android]
@@ -117,7 +117,7 @@ Log 的基本使用方法可參閱 [Android Log](https://foolcodefun.github.io/b
 
 # 四、斷點
 
-在偵錯模式下，設斷點是個很好的 Debug 方法，圖3.1紅筐內的第一個按鈕是用來開啟偵錯模式的，第二個按鈕可以將 Debug 模式套用在正在執行的 App 上。
+在偵錯模式下，設斷點是個很好的 Debug 方法，圖3.1紅框內的第一個按鈕是用來開啟偵錯模式的，第二個按鈕可以將 Debug 模式套用在正在執行的 App 上。
 
 <img src="{{ site.img_path }}/20171124/startDebug.png" width="100%" style="max-width:700px;"/>
 
