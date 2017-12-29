@@ -19,7 +19,7 @@ icon: icon-html
 > ### [1. 傳遞架構說明](#3.1)
 > * ### [(1) startActivityForResult](#3.1.1)
 > * ### [(2) setResult](#3.1.2)
-> * ### [(1) onActivityResult](#3.1.1)
+> * ### [(3) onActivityResult](#3.1.1)
 >
 > ### [2. 範例程式碼](#3.2)
 * ### [四、題外話：關於 Activity 的生命週期](#4)
