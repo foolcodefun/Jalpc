@@ -23,7 +23,7 @@ public abstrask class AsyncTask<Params, Progress, Result>
 
 1. Params:傳入doInBackground的參數。
 2. Progress:傳入onProgressUpdate的參數，可在doInBackgroundg執行時更新介面。
-3. Result:doInBacjground結束後傳入onPostExecute的參數。
+3. Result:doInBackground結束後傳入onPostExecute的參數。
 
 若不指定泛型的類型，使用如下
 ```java
