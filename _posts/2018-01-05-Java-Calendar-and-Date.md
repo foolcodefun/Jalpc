@@ -97,7 +97,9 @@ Log.d(TAG, "onSharedPreferenceChanged: "+now.get(Calendar.YEAR)+"-"
 ); 
 ```
 
-```執行結果
+執行結果
+
+```
 2018-0-4 10:50:49
 ```
 
