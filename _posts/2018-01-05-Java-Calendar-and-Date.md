@@ -54,6 +54,7 @@ java.text.DateFormat 是一個用來處理字串時間格式與 Date 格式轉�
 Date date = new Date();
 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 String sdate= dateFormat.format(date);
+System.out.print(sdate)
 ```
 
 執行結果：
@@ -68,7 +69,7 @@ String sdate= dateFormat.format(date);
 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 try {
     Date date = dateFormat.parse("2018-01-04 22:11:11");    
-    Log.d(TAG,date.getTime()+"");
+    System.out.print(date.getTime()+"");
 } catch (ParseException e) {
     e.printStackTrace();
 }
@@ -88,7 +89,7 @@ java.util.Calendar 的應用多在時間的加減以及比較。
 
 ```java
 Calendar now = Calendar.getInstance();
-Log.d(TAG, "onSharedPreferenceChanged: "+now.get(Calendar.YEAR)+"-"
+System.out.print(now.get(Calendar.YEAR)+"-"
     +now.get(Calendar.MONTH)+"-"
     +now.get(Calendar.DAY_OF_MONTH)+" "
     +now.get(Calendar.HOUR)+":"
@@ -115,6 +116,45 @@ calendor.add(Calendar.DATE,3)//對時間加３天
 ```
 
 比較時間前後則可用 `after()` 或 `before()` 方法。
+
+Date 與 Calendar
+
+```java
+Calendar alarm = Calendar.getInstance();
+String time = "07:00"
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+try {
+    Date date = simpleDateFormat.parse(time);
+    alarm.setTime(date);
+    alarm.set(Calendar.YEAR,now.get(Calendar.YEAR));
+    alarm.set(Calendar.MONTH,now.get(Calendar.MONTH));
+    alarm.set(Calendar.DAY_OF_MONTH,now.get(Calendar.DAY_OF_MONTH));
+    System.out.print(alarm.get(Calendar.YEAR)+"-"
+            +alarm.get(Calendar.MONTH)+"-"
+            +alarm.get(Calendar.DAY_OF_MONTH)+" "
+            +alarm.get(Calendar.HOUR)+":"
+            +alarm.get(Calendar.MINUTE)+":"
+            +alarm.get(Calendar.SECOND)    
+    );
+    alarm.setTime(date);
+    System.out.print(alarm.get(Calendar.YEAR)+"-"
+            +alarm.get(Calendar.MONTH)+"-"
+            +alarm.get(Calendar.DAY_OF_MONTH)+" "
+            +alarm.get(Calendar.HOUR)+":"
+            +alarm.get(Calendar.MINUTE)+":"
+            +alarm.get(Calendar.SECOND)
+    );
+} catch (ParseException e) {
+    e.printStackTrace();
+}
+```
+
+執行結果
+
+```
+2018-0-5 8:0:0
+1970-0-1 8:0:0
+```
 
 
 
