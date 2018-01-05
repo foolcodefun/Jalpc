@@ -103,7 +103,16 @@ Log.d(TAG, "onSharedPreferenceChanged: "+now.get(Calendar.YEAR)+"-"
 
 比照執行結果與電腦上的時會發現月份應該是１才對，這是因為 Calendar 對月份的列舉從零開始。
 
+對時間做加減
 
+```java
+Calendar calendar = Calendar.getInstance();
+calendor.add(Calendar.YEAR,1)//對時間加１年
+calendor.add(Calendar.MONTH,-2)//對時間減去２個月
+calendor.add(Calendar.DATE,3)//對時間加３天
+```
+
+比較時間前後則可用 `after()` 或 `before()` 方法。
 
 
 
