@@ -18,13 +18,13 @@ icon: icon-html
 
 # 一、前言
 
-在 Java 開發中，日期處理是非常複雜的一塊，時間處理要考慮時間的度量以及年曆的種類。本篇文章將介紹 java.util.Date、java.text.DateFormat、java.util.Calendar 和 java.util.TimeZone 的基本概念以及使用。
+在 Java 開發中，日期處理是非常複雜的一塊，時間處理要考慮時間的度量以及年曆的種類。本篇文章將介紹 java.util.Date、java.text.DateFormat、和 java.util.Calendar 的基本概念以及使用。
 
 <h2 id="2"></h2>
 
 # 二、Date
 
-以 java.util.Date 的時間是 epoch 毫秒數，也就是 1970 年１月１日 00:00:00 UTC 後經過的毫秒數。此類別封裝的時間數字不具閱讀意義，如下程式碼及其執行結果。
+java.util.Date 的時間是 epoch 毫秒數，也就是 1970 年１月１日 00:00:00 UTC 後經過的毫秒數。此類別封裝的時間數字不具閱讀意義，如下程式碼及其執行結果。
 
 
 Date 基本使用程式碼：
