@@ -351,8 +351,6 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-<a href="https://github.com/foolcodefun/-Android-TestListView/tree/master/TestListview">客製化 ListView 專案連結</a>
-
 相關文章
 
 * [Android ListView Tutorial](https://www.raywenderlich.com/124438/android-listview-tutorial)
