@@ -75,7 +75,7 @@ new DownloadTask().execute(3);
 ```
 數字 3 代表三秒，也可輸入其他數字但須符合上段程式碼定義的 Integer...，此參數會傳入 doInBackground
 
-###完整程式碼如下
+### 完整程式碼如下
 
 activity_main.xml
 

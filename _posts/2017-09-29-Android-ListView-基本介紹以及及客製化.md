@@ -27,7 +27,7 @@ ListView 是 AdatpterView 的次類別，作為資料的容器需要一個能為
 >3. SimpleCursorAdapter：輸入資料是由資料庫 ( SQLite ) 查詢的Cursor時。
 >4. BaseAdapter：需完整的客製化 ( custom )。
 
-看到這裡我們可以發現 ListView 和資料源之間使用 ListAdapter 進行資料轉接的行為正是設計模式 ( Design Pattern ) 中的轉接器模式 ( Adapter Pattern )，也稱作適配器模式。轉接器模式可使不相容的介面互相合作，而ListAdapter的目標就是將資料員轉成ListView的形式且串在一個ListView需要的畫面 ( View )。
+看到這裡我們可以發現 ListView 和資料源之間使用 ListAdapter 進行資料轉接的行為正是設計模式 ( Design Pattern ) 中的轉接器模式 ( Adapter Pattern )，也稱作適配器模式。轉接器模式可使不相容的介面互相合作，而 ListAdapter 的目標就是將資料員轉成 ListView 的形式且串在一個 ListView 需要的畫面 ( View )。
 
 <img src="{{ site.img_path }}/20170929/AdpLVD.png" width="30%">
 
