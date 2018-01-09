@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Android 淺談後台計算與 JobScheduler"
-date:   2018-01-12
+date:   2018-01-08
 desc: "BackGround Operation"
 keywords: "Android,JobScheduler"
 categories: [Android]

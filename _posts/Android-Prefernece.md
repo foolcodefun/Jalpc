@@ -1,1 +1,0 @@
-https://developer.android.com/guide/topics/ui/settings.html?hl=zh-tw
