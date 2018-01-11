@@ -91,11 +91,10 @@ public class ContentFragment extends Fragment {
 
 4. MainActivity.java
 
-完成下面的程式碼後就完成了 Fragment 的基本使用
+完成下面的程式碼後就完成了 Fragment 的基本使用，程式碼中先用 FragmentManager 尋找 Fragment 是因為呼叫 onCreate 後所建立的 Fragment 會在 onDestroy 調用後被 FragmentManager 儲存起來，所以下一次呼叫 onCreate 時就直接從 FragmentManager 取得就可以了。
 
 ```java
 package com.little.testfragment;
-
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
