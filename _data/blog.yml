@@ -16,14 +16,17 @@
 #- name: Database
 #  href: /database/
 
-#- name: Mac
-#  href: /mac/
+# - name: Mac
+#   href: /mac/
 
 - name: Android
   href: /android/
+  
+- name: Java
+  href: /java/
 
-- name: Life
-  href: /life/
+# - name: Life
+#   href: /life/
 
 # Don't display donation page: change donation to off at file '_config.yml'
 - name: Donate
