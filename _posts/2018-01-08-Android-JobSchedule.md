@@ -39,7 +39,7 @@ icon: icon-html
 
 * ## Services
 
-> Services 通常應用在前景服務，例如正在播放的音樂會在通知列常駐並想是播放音樂的進度，所以他需要一個通知的 status bar icon。另外在 API26 以上的版本，為了避免後台 service 消耗太多手機資源，後台 service 已經被限制，當使用者結束 APP 的使用，後台 service 便會在很短的時間內關掉。但是光方提供了一個[白名單](https://developer.android.com/about/versions/oreo/background.html?#overview)，就是在以下幾種狀況下，service 是可以在後台被啟用。
+> Services 通常應用在前景服務，例如正在播放的音樂會在通知列常駐並想是播放音樂的進度，所以他需要一個通知的 status bar icon。另外在 API26 以上的版本，為了避免後台 service 消耗太多手機資源，後台 service 已經被限制，當使用者結束 APP 的使用，後台 service 便會在很短的時間內關掉。但是官方提供了一個[白名單](https://developer.android.com/about/versions/oreo/background.html?#overview)，就是在以下幾種狀況下，service 是可以在後台被啟用。
 > * ### 處理高優先權的 Firebase Cloud Messaging (FCM) 訊息
 > * ### 接收廣播，像是 SMS/MMS 訊息
 > * ### 從 notification 執行 PendingIntent
@@ -310,11 +310,17 @@ public class NotificationJobService extends JobService {
 <h2 id="4"></h2>
 
 # 參考資料
+
 [官方文章：後台計算的選擇](https://developer.android.com/guide/background/index.html)
+
 [官方文章：後台計算的限制](https://developer.android.com/about/versions/oreo/background.html?#overview)
+
 [官方文章：intelligent Job-Scheduling](https://developer.android.com/topic/performance/scheduling.html)
+
 [官方文章：JobScheduler](https://developer.android.com/reference/android/app/job/JobScheduler.html)
+
 [官方文章：JobInfo](https://developer.android.com/reference/android/app/job/JobInfo.html)
+
 [官方網站：Scheduling Repeating Alarms](https://developer.android.com/training/scheduling/alarms.html)
 
 
