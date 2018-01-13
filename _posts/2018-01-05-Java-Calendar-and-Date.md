@@ -1,18 +1,18 @@
 ---
 layout: post
-title:  "Java Calender and Date 的基本使用"
+title:  "Java Calendar and Date 的基本使用"
 date: 2018-01-05
-desc: "Java Calender Date"
-keywords: "Calender, Date"
+desc: "Java Calendar Date"
+keywords: "Calendar, Date"
 categories: [Java]
-tags: [Java ,Calender,Date]
+tags: [Java ,Calendar,Date]
 icon: icon-html
 ---
 
 * ### [前言簡介](#1)
 * ### [二、Date](#2)
 * ### [三、DateFormat](3)
-* ### [四、Calender](#4)
+* ### [四、Calendar](#4)
 
 <h2 id="1"></h2>
 
