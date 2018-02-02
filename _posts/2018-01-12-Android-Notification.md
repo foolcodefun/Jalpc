@@ -30,7 +30,7 @@ icon: icon-html
 Natification 的是透過 Notification.builder 建置的；NotificationManager 顧名思義其功能是用來管理 Natification；NatificationChannel 則是在 Android 8.0 特別退出的新功能，它可以讓使用者設定此 APP 的某異類通知是否要開啟等功能，若是開發目標大於或等於 API26 則必須在 Notification.builder 設定 NatificationChannel，否則通知將不會被啟動。Natification 的基本使用可參考下面的程式碼。
 
 ```java
-NotificationManager manager = (NotificationManager)                         getSystemService(NOTIFICATION_SERVICE);
+NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 Notification.Builder builder = new Notification.Builder(this)
     .setContentTitle("Test Title")
     .setContentText("This is a test of text")
