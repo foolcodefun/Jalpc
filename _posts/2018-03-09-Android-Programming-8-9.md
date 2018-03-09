@@ -22,3 +22,82 @@ icon: icon-html
 # 二、Challenge 8 Challenge
 
 第八章的內容主要是在講 Fragment 的使用與整合、Singletan 模式的介紹以及 RecyclerView 的基本使用。此章節的挑戰是 RecyclerView 的延伸應用，希望在一個 RecyclerView 在不一樣程度的 Crime 以不一樣的 row_item 展示，挑戰中還提到了要 implement CrimeAdapter 類別中的  `getItenViewType(int)` 方法，並在 `onCreateViewHolder(ViewGroup, int)` 方法中回傳不一樣的 ViewHolder。
+
+以下是筆者完成挑戰後對 CrimeAdapter 類別修改的部分
+
+```
+@Override
+        public int getItemViewType(int position) {
+            return mCrimes.get(position).isRequiresPolice() ? SERIOUS_CRIME : NORMAL_CRIME;
+        }
+
+        @Override
+        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            switch (viewType) {
+                case NORMAL_CRIME:
+                    return new NormalHolder(inflater, parent);
+                case SERIOUS_CRIME:
+                    return new CrimePoliceHolder(inflater, parent);
+                default:
+                    return null;
+            }
+        }
+```
+`getItemViewType(int)` 方法會根據 Crime 的資料來決定是要回傳什麼數字。而 `onCreateViewHolder` 會依照 viewType 的數字決定以哪一個 ViewHolder 展現資料。
+
+以下是筆者完成挑戰後對 ViewHolder 類別修改的部分
+
+```
+private abstract class CrimeHolder extends ViewHolder {
+
+        public CrimeHolder(View itemView) {
+            super(itemView);
+        }
+
+        public abstract void bind(Crime crime) ;
+    }
+
+    private class NormalHolder extends CrimeHolder {
+
+        private Crime mCrime;
+        private final TextView mDateTextView;
+        private final TextView mTitleTextView;
+
+        public NormalHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            mTitleTextView = itemView.findViewById(R.id.crime_title);
+            mDateTextView = itemView.findViewById(R.id.crime_date);
+        }
+
+        public void bind(Crime crime) {
+            mCrime = crime;
+            mTitleTextView.setText(mCrime.getTitle());
+            mDateTextView.setText(mCrime.getDate().toString());
+        }
+    }
+
+    private class CrimePoliceHolder extends CrimeHolder {
+
+        private Crime mCrime;
+        private final TextView mDateTextView;
+        private final TextView mTitleTextView;
+
+        public CrimePoliceHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_crime_police, parent, false));
+            mTitleTextView = itemView.findViewById(R.id.crime_title);
+            mDateTextView = itemView.findViewById(R.id.crime_date);
+        }
+
+        public void bind(Crime crime) {
+            mCrime = crime;
+            mTitleTextView.setText(mCrime.getTitle());
+            mDateTextView.setText(mCrime.getDate().toString());
+        }
+    }
+```
+
+這就是這次挑戰的內容了。
+
+# 參考資料
+[Big Nerd Ranch](https://forums.bignerdranch.com/)
