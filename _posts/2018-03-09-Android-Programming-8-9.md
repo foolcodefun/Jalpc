@@ -25,7 +25,7 @@ icon: icon-html
 
 以下是筆者完成挑戰後對 CrimeAdapter 類別修改的部分
 
-```
+```java
 @Override
         public int getItemViewType(int position) {
             return mCrimes.get(position).isRequiresPolice() ? SERIOUS_CRIME : NORMAL_CRIME;
@@ -48,7 +48,7 @@ icon: icon-html
 
 以下是筆者完成挑戰後對 ViewHolder 類別修改的部分
 
-```
+```java
 private abstract class CrimeHolder extends ViewHolder {
 
         public CrimeHolder(View itemView) {
@@ -96,6 +96,7 @@ private abstract class CrimeHolder extends ViewHolder {
         }
     }
 ```
+雖然兩個繼承 CrimeHolder 的 View 十分類似，但還是分成兩個寫。這樣的好處是當某一個 View 有了變化的話，在修改程式上比較有彈性。
 
 這就是這次挑戰的內容了。
 
