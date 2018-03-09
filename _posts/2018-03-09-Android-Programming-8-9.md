@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Android Programming CH7 & CH8 文章解析"
+title:  "Android Programming CH8 挑戰"
 date:   2018-03-09
 desc: "Preference"
 keywords: "Android"
