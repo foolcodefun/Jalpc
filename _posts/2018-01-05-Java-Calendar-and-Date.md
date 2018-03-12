@@ -11,7 +11,7 @@ icon: icon-html
 
 * ### [前言簡介](#1)
 * ### [二、Date](#2)
-* ### [三、DateFormat](3)
+* ### [三、DateFormat](#3)
 * ### [四、Calendar](#4)
 
 <h2 id="1"></h2>
