@@ -36,4 +36,4 @@ public void bind(Crime crime) {
 }
 ```
 
-<img src="{{ site.img_path }}/20180316/chapter9challenge.png" width="100%" style="max-width:700px;"/>
+<img src="{{ site.img_path }}/20180316/chapter9challenge.png" width="100%" style="max-width:350px;"/>
