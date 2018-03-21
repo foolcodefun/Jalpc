@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "書籍：Android Programming CH9 挑戰"
-date:   2018-03-16
+title:  "書籍：Android Programming CH10 挑戰"
+date:   2018-03-23
 desc: "Preference"
 keywords: "Android"
 categories: [Android]
@@ -10,7 +10,11 @@ icon: icon-html
 ---
 
 * ### [一、前言簡介](#1)
-* ### [二、Chapter 9 Challenge](#2)
+* ### [二、Chapter 10 Challenge](#2)
+> ### [2.1 挑戰一：Efficient RecyclerView Reloading](#2.1)
+> ### [2.2 挑戰二：Improving CrimeLab Performance](#2.2)
+> ### [2.3 完成挑戰後的完整程式碼](#2.3)
+* ### [考資料](#3)
 
 <h2 id="1"></h2>
 
