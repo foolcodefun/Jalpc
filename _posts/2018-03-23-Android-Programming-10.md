@@ -13,31 +13,38 @@ icon: icon-html
 * ### [二、Chapter 10 Challenge](#2)
 > ### [2.1 挑戰一：Efficient RecyclerView Reloading](#2.1)
 > ### [2.2 挑戰二：Improving CrimeLab Performance](#2.2)
-> ### [2.3 完成挑戰後的完整程式碼](#2.3)
 * ### [考資料](#3)
 
 <h2 id="1"></h2>
 
 # 一、前言簡介
-本篇文章是 Android Programming 書中第九章的 Challenge，此次的 Challenge  與日期格式有關，而日期格式的基本使用可參考 [Java Calendar and Date 的基本使用](https://foolcodefun.github.io/blog/java/2018/01/05/Java-Calendar-and-Date.html)。
+本篇文章是 Android Programming 書中第十章的 Challenge，此次的 Challenge 與 RecyclerView 的重載以及 Java Collection 的效率有關。
 
 <h2 id="1"></h2>
-# 二、Chapter 9 Challenge
+# 二、Chapter 10 Challenge
 
-第九章的題目挑戰要求將日期的顯示格式改為類似 "Monday, Jul 15, 2018" 的格式，藉由 [JAVA 的文件](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)可找到年月日相對應的代號，在對程式進行相對應的修改即可。
+## 2.1 挑戰一：Efficient RecyclerView Reloading
+每次載入RecyclerView 時最多只會有一個 Crime 的資料有變化，因此在原本的程式碼中使用 `notifyDataSetChanged()` 方法將 RecyclerView 中所有 Crime 資料更新是效率較差的做法。比較有效率的方法是找出哪一個 Crime 資料更動，並用 `notifyItemChanged(int position)` 更新 RecyclerView 的 Crime 資料。
 
-請修改 CrimeListFragment.java 中 CrimeHolder 內部類別的 `bind(crime)` 方法，如下。
+### 解題想法
+
+CrimeListFragment.java
 ```java
-public void bind(Crime crime) {
-    mCrime = crime;
-    mTitleTextView.setText(mCrime.getTitle());
-
-    DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM dd, yyy");
-    String date = dateFormat.format(crime.getDate());
-    mDateTextView.setText(date);
-            
-    mSolveImageView.setVisibility(crime.isSolved()?View.VISIBLE:View.INVISIBLE);
-}
 ```
+
+## 2.2 挑戰二：Improving CrimeLab Performance
+此挑戰中的 CrimeLab 用 ArrayList 儲存了許多 Crime，`getCrime(UUID)` 方法可以從 CrimeLab 尋找特定的 Crime，但是效率上較差，因此挑戰中希望讀者看以尋找更有效率的方法並且不改變 RecyclerView 中顯示 Crime 的順序。
+
+### 解題想法：
+
+CrimeLab.java
+```java
+```
+
+CrimeListFragment.java
+```java
+```
+
+# 參考資料
 
 <img src="{{ site.img_path }}/20180316/chapter9challenge.png" width="100%" style="max-width:350px;"/>
