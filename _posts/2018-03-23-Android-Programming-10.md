@@ -20,8 +20,10 @@ icon: icon-html
 # 一、前言簡介
 本篇文章是 Android Programming 書中第十章的 Challenge，此次的 Challenge 與 RecyclerView 的重載以及 Java Collection 的效率有關。
 
-<h2 id="1"></h2>
+<h2 id="2"></h2>
 # 二、Chapter 10 Challenge
+
+<h2 id="2.1"></h2>
 
 ## 2.1 挑戰一：Efficient RecyclerView Reloading
 每次載入RecyclerView 時最多只會有一個 Crime 的資料有變化，因此在原本的程式碼中使用 `notifyDataSetChanged()` 方法將 RecyclerView 中所有 Crime 資料更新是效率較差的做法。比較有效率的方法是找出哪一個 Crime 資料更動，並用 `notifyItemChanged(int position)` 更新 RecyclerView 的 Crime 資料。
@@ -61,6 +63,8 @@ public class CrimeListFragment extends Fragment {
     }
 ```
 在程式碼中先宣告一個屬性 `private int mCrimePosition;` 用來記錄要更新的 Crime 在 RecyclerView 中的位置。`updateUI()` 方法中利用記錄到的 mCrimePosition 來更新單個Ｃrime 的資料。最後在 CrimeHolder 的 `onClick()` 方法裡，也就是當點擊某個Ｃrime 會調用的點擊事件裡用 ViewHolder 中的 `getAdapterPosition()` 方法取得所點擊的Ｃrime 的位置。這樣就完成了此題挑戰的需求。
+
+<h2 id="2.2"></h2>
 
 ## 2.2 挑戰二：Improving CrimeLab Performance
 此挑戰中的 CrimeLab 用 ArrayList 儲存了許多 Crime，`getCrime(UUID)` 方法可以從 CrimeLab 尋找特定的 Crime，但是效率上較差，因此挑戰中希望讀者看以尋找更有效率的方法並且不改變 RecyclerView 中顯示 Crime 的順序。
