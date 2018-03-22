@@ -30,6 +30,7 @@ icon: icon-html
 當按下 CrimeListFragment 的其中一個 Crime 時，會面會移動到其中一個 Crime 的詳細資料，也就是 CrimeFragment 中綁定的畫面。在按下 CrimeListFragment 的其中一個 Crime 時，CrimeListFragment 的生命週期會呼叫 `onPause()` 和 `onStop()`，這代表 CrimeListFragment 並沒有被摧毀，因此 CrimeListFragment 中的屬性都還保留原本的資料。因此在 CrimeListFragment 中可以新設一個屬性記錄所點擊 Crime 在 RecyclerView 中的 position。因此在畫面從 Crime 的詳細資訊回到 CrimeListFragment 只需要在 `onResume()` 方法中調用 RecyclerView.Adapter 的 `notifyItemChanged(int position)` 方法即可。以下是 CrimeListFragment.java中更動過的程式碼。
 
 CrimeListFragment.java
+
 ```java
 public class CrimeListFragment extends Fragment {
     ······
@@ -68,12 +69,39 @@ public class CrimeListFragment extends Fragment {
 CrimeLab 中是利用 ArrayList 儲存並搜尋 Crime，在題目中要求要提升玄找單個 Crime 的速率，且 RecyclerView 在顯示Ｃrime 時的薰續不可改變。HashLinkMap 正好可以符合上訴兩個條件。
 
 CrimeLab.java
-```java
-```
 
-CrimeListFragment.java
 ```java
+public class CrimeLab {
+    ······
+    
+    private LinkedHashMap<UUID, Crime> mCrimes;
+    ······
+    
+    private CrimeLab(Context context) {
+        mCrimes = new LinkedHashMap<UUID, Crime>();
+        for (int i = 0; i < 100; i++) {
+            ······
+            
+            mCrimes.put(crime.getId(), crime);
+        }
+    }
+
+    public List<Crime> getCrimes() {
+        return new ArrayList<>(mCrimes.values());
+    }
+
+    public Crime getCrime(UUID id) {
+        for (Crime crime : mCrimes.values()) {
+            if (crime.getId().equals(id)) {
+                return crime;
+            }
+        }
+        return null;
+    }
+}
+
 ```
 
 # 參考資料
+
 [Big Nerd Ranch](https://forums.bignerdranch.com/c/android-programming-the-big-nerd-ranch-guide)
