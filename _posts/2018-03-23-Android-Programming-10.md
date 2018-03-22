@@ -13,7 +13,7 @@ icon: icon-html
 * ### [二、Chapter 10 Challenge](#2)
 > ### [2.1 挑戰一：Efficient RecyclerView Reloading](#2.1)
 > ### [2.2 挑戰二：Improving CrimeLab Performance](#2.2)
-* ### [考資料](#3)
+* ### [參考資料](#3)
 
 <h2 id="1"></h2>
 
