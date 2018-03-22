@@ -65,6 +65,7 @@ public class CrimeListFragment extends Fragment {
 此挑戰中的 CrimeLab 用 ArrayList 儲存了許多 Crime，`getCrime(UUID)` 方法可以從 CrimeLab 尋找特定的 Crime，但是效率上較差，因此挑戰中希望讀者看以尋找更有效率的方法並且不改變 RecyclerView 中顯示 Crime 的順序。
 
 ### 解題想法：
+CrimeLab 中是利用 ArrayList 儲存並搜尋 Crime，在題目中要求要提升玄找單個 Crime 的速率，且 RecyclerView 在顯示Ｃrime 時的薰續不可改變。HashLinkMap 正好可以符合上訴兩個條件。
 
 CrimeLab.java
 ```java
@@ -75,3 +76,4 @@ CrimeListFragment.java
 ```
 
 # 參考資料
+[Big Nerd Ranch](https://forums.bignerdranch.com/c/android-programming-the-big-nerd-ranch-guide)
