@@ -27,10 +27,39 @@ icon: icon-html
 每次載入RecyclerView 時最多只會有一個 Crime 的資料有變化，因此在原本的程式碼中使用 `notifyDataSetChanged()` 方法將 RecyclerView 中所有 Crime 資料更新是效率較差的做法。比較有效率的方法是找出哪一個 Crime 資料更動，並用 `notifyItemChanged(int position)` 更新 RecyclerView 的 Crime 資料。
 
 ### 解題想法
+當按下 CrimeListFragment 的其中一個 Crime 時，會面會移動到其中一個 Crime 的詳細資料，也就是 CrimeFragment 中綁定的畫面。在按下 CrimeListFragment 的其中一個 Crime 時，CrimeListFragment 的生命週期會呼叫 `onPause()` 和 `onStop()`，這代表 CrimeListFragment 並沒有被摧毀，因此 CrimeListFragment 中的屬性都還保留原本的資料。因此在 CrimeListFragment 中可以新設一個屬性記錄所點擊 Crime 在 RecyclerView 中的 position。因此在畫面從 Crime 的詳細資訊回到 CrimeListFragment 只需要在 `onResume()` 方法中調用 RecyclerView.Adapter 的 `notifyItemChanged(int position)` 方法即可。以下是 CrimeListFragment.java中更動過的程式碼。
 
 CrimeListFragment.java
 ```java
+public class CrimeListFragment extends Fragment {
+    ······
+    private int mCrimePosition;
+    
+    private void updateUI(Bundle savedInstanceState) {
+    ······
+    
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyItemChanged(mCrimePosition);
+        }
+    }
+    ······
+    
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    
+        @Override
+        public void onClick(View v) {
+            ······
+            
+            mCrimePosition = getAdapterPosition();
+            ······
+            
+        }
+    }
 ```
+在程式碼中先宣告一個屬性 `private int mCrimePosition;` 用來記錄要更新的 Crime 在 RecyclerView 中的位置。`updateUI()` 方法中利用記錄到的 mCrimePosition 來更新單個Ｃrime 的資料。最後在 CrimeHolder 的 `onClick()` 方法裡，也就是當點擊某個Ｃrime 會調用的點擊事件裡用 ViewHolder 中的 `getAdapterPosition()` 方法取得所點擊的Ｃrime 的位置。這樣就完成了此題挑戰的需求。
 
 ## 2.2 挑戰二：Improving CrimeLab Performance
 此挑戰中的 CrimeLab 用 ArrayList 儲存了許多 Crime，`getCrime(UUID)` 方法可以從 CrimeLab 尋找特定的 Crime，但是效率上較差，因此挑戰中希望讀者看以尋找更有效率的方法並且不改變 RecyclerView 中顯示 Crime 的順序。
@@ -46,5 +75,3 @@ CrimeListFragment.java
 ```
 
 # 參考資料
-
-<img src="{{ site.img_path }}/20180316/chapter9challenge.png" width="100%" style="max-width:350px;"/>
