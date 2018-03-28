@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "書籍：Android Programming CH10 挑戰"
-date:   2018-03-23
+title:  "書籍：Android Programming CH11 挑戰 (ViewPager)"
+date:   2018-03-30
 desc: "Preference"
 keywords: "Android"
 categories: [Android]
@@ -10,99 +10,51 @@ icon: icon-html
 ---
 
 * ### [一、前言簡介](#1)
-* ### [二、Chapter 10 Challenge](#2)
-> ### [2.1 挑戰一：Efficient RecyclerView Reloading](#2.1)
-> ### [2.2 挑戰二：Improving CrimeLab Performance](#2.2)
+* ### [二、Chapter 11 Challenge](#2)
+> ### [2.1 挑戰一：Restoring CrimeFragment's Margin](#2.1)
+> ### [2.2 挑戰二：Adding First and Last Buttons](#2.2)
 * ### [參考資料](#3)
 
 <h2 id="1"></h2>
 
 # 一、前言簡介
-本篇文章是 Android Programming 書中第十章的 Challenge，此次的 Challenge 與 RecyclerView 的重載以及 Java Collection 的效率有關。
+本篇文章是 Android Programming 書中第十一章的 Challenge，此次的 Challenge 與 與 ViewPager 的基礎應用有關。
 
 <h2 id="2"></h2>
-# 二、Chapter 10 Challenge
+# 二、Chapter 11 Challenge
 
 <h2 id="2.1"></h2>
 
-## 2.1 挑戰一：Efficient RecyclerView Reloading
-每次載入 RecyclerView 時最多只會有一個 Crime 的資料有變化，因此在原本的程式碼中使用 `notifyDataSetChanged()` 方法將 RecyclerView 中所有 Crime 資料更新是效率較差的做法。比較有效率的方法是找出哪一個 Crime 資料更動，並用 `notifyItemChanged(int position)` 更新 RecyclerView 的 Crime 資料。
+## 2.1 挑戰一：Restoring CrimeFragment's Margin
+
+### 題目
+
+當 CrimeFragment 套用到 ViewPager 上時，fragment_crime.xml 裡的 margin 不再運作，這是因為 ViewPager 不支持 margin 屬性。請讀者修改 fragment_crime.xml 使得畫面與原本一樣。
 
 ### 解題想法
-當按下 CrimeListFragment 的其中一個 Crime 時，畫面會移動到其中一個 Crime 的詳細資料，也就是 CrimeFragment 中綁定的畫面。在按下 CrimeListFragment 的其中一個 Crime 時，CrimeListFragment 的生命週期會呼叫 `onPause()` 和 `onStop()`，這代表 CrimeListFragment 並沒有被摧毀，CrimeListFragment 中的屬性都還保留著原本的資料。因此在 CrimeListFragment 中可以新設一個屬性記錄所點擊 Crime 在 RecyclerView 中的 position。在畫面從 Crime 的詳細資訊回到 CrimeListFragment 只需要在 `onResume()` 方法中調用 RecyclerView.Adapter 的 `notifyItemChanged(int position)` 方法即可。以下是 CrimeListFragment.java中更動過的程式碼。
 
-CrimeListFragment.java
+看到此題的第一個想法是利用 padding 屬性來解決，後來又想到 ConstrainLayout 或許也能解決此問題。以下程式碼是以 ConstrainLayout 為基礎完成的。
 
-```java
-public class CrimeListFragment extends Fragment {
-    ······
-    private int mCrimePosition;
-    
-    private void updateUI(Bundle savedInstanceState) {
-    ······
-    
-        if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
-            mCrimeRecyclerView.setAdapter(mAdapter);
-        } else {
-            mAdapter.notifyItemChanged(mCrimePosition);
-        }
-    }
-    ······
-    
-    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    
-        @Override
-        public void onClick(View v) {
-            ······
-            
-            mCrimePosition = getAdapterPosition();
-            ······
-            
-        }
-    }
+fragment_crime.xml
+
+```xml
 ```
-在程式碼中先宣告一個屬性 `private int mCrimePosition;` 用來記錄要更新的 Crime 在 RecyclerView 中的位置。`updateUI()` 方法中利用記錄到的 mCrimePosition 來更新單個Ｃrime 的資料。最後在 CrimeHolder 的 `onClick()` 方法裡，也就是當點擊某個Ｃrime 會調用的點擊事件裡用 ViewHolder 中的 `onClick()` 方法，在此方法中以 `getAdapterPosition()` 方法取得所點擊的Ｃrime 的位置。這樣就完成了此題挑戰的需求。
+
 
 <h2 id="2.2"></h2>
 
-## 2.2 挑戰二：Improving CrimeLab Performance
-此挑戰中的 CrimeLab 用 ArrayList 儲存了許多 Crime，`getCrime(UUID)` 方法可以從 CrimeLab 尋找特定的 Crime，但是效率上較差，因此挑戰中希望讀者看以尋找更有效率的方法並且不改變 RecyclerView 中顯示 Crime 的順序。
+## 2.2 挑戰二：Adding First and Last Buttons
+
+### 題目：
+
+請加上兩個按鈕，使得 ViewPager 可以直接滑動到第一個或是最後一個 Crime。當 ViewPager 在第一個 Crime 時，移動到第一個的按鈕應設為 disable；當 ViewPager 在最後一個 Crime 時，移動到最後一個的按鈕應設為 disable。
 
 ### 解題想法：
-CrimeLab 中是利用 ArrayList 儲存並搜尋 Crime，在題目中要求要提升尋找單個 Crime 的速率，且 RecyclerView 在顯示Ｃrime 時的順序不可改變。HashLinkMap 正好可以符合上訴兩個條件。
 
-CrimeLab.java
+這題的目的是希望讀者能更熟悉 ViewPager 裡的 OnPageChangeListener 介面以及 Button 的點擊事件 (其實這也是一個介面)。以下程式碼為解題的答案。
 
+CrimePagerActivity.java
 ```java
-public class CrimeLab {
-    ······
-    
-    private LinkedHashMap<UUID, Crime> mCrimes;
-    ······
-    
-    private CrimeLab(Context context) {
-        mCrimes = new LinkedHashMap<UUID, Crime>();
-        for (int i = 0; i < 100; i++) {
-            ······
-            
-            mCrimes.put(crime.getId(), crime);
-        }
-    }
-
-    public List<Crime> getCrimes() {
-        return new ArrayList<>(mCrimes.values());
-    }
-
-    public List<Crime> getCrimes() {
-        return new ArrayList<>(mCrimes.values());
-    }
-    
-    public Crime getCrime(UUID id) {
-        return mCrimes.get(id);
-    }
-}
-
 ```
 
 # 參考資料
