@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "書籍：Android Programming CH9 挑戰"
+title:  "書籍：Android Programming CH9 挑戰 (Date)"
 date:   2018-03-16
 desc: "Preference"
 keywords: "Android"

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "書籍：Android Programming CH10 挑戰 (RecyclerView)"
+title:  "書籍：Android Programming CH10 挑戰"
 date:   2018-03-23
 desc: "Preference"
 keywords: "Android"
