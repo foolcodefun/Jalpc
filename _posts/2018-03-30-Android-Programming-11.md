@@ -102,6 +102,16 @@ fragment_crime.xml
 </android.support.constraint.ConstraintLayout>
 ```
 
+另外，ConstrainLayout 是放在 Support Library 裡， 要使用 ConstrainLayout 請在 gradle 加上以下程式碼。
+
+```
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+}
+```
+
+以往在排版時須用多種 Layout 組合完成，像是 LinearLayout 與 RelativeLayout 的組合，這兩個 Layout 的組合常常會造成巢狀結構，因此會有很大效能損耗。而 ConstrainLayout 使 xml 扁平化，可以達到效能提升的效果。ConstrainLayout 的使用和 RelativeLayout 有點像，但功能更為強大，比如說他有 GuideLine 功能且能以比例調整位置，在排版上用 Layout Editor 會比手打程式碼來得快。基於上述原因，在此推坑各位讀者大大。不過在使用 ConstrainLayout 時請注意他在常跟寬的設定並沒有 match_parent，但是多了個 match_constraint，match_constraint u,3
+可以用 0dp 表示。 
 
 <h2 id="2.2"></h2>
 
@@ -118,80 +128,40 @@ fragment_crime.xml
 CrimePagerActivity.java
 
 ```java
-package com.little.criminalintent;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-
-import java.util.List;
-import java.util.UUID;
-
-/**
- * Created by sarah on 28/03/2018.
- */
-
-public class CrimePagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+......
+public class CrimePagerActivity extends AppCompatActivity{
 
     private static final String EXTRA_CRIME_ID = "com.little.criminalintent.crime_id";
 
-    private ViewPager mViewPager;
-    private List<Crime> mCrimes;
+    ......
     private Button mFirstButton;
     private Button mLastButton;
 
-    public CrimePagerActivity() {
-    }
-
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
-        return intent;
-    }
-
+    ......
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime_pager);
-
-        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
-
-        mViewPager = findViewById(R.id.crime_view_pager);
+    
+        ......
         mFirstButton = findViewById(R.id.first);
         mLastButton = findViewById(R.id.last);
-
+        
+        ......
         mCrimes = CrimeLab.get(this).getCrimes();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        mViewPager.addOnPageChangeListener(this);
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
             @Override
-            public int getCount() {
-                return mCrimes.size();
+            public void onPageSelected(int position) {
+                setButtonsEnable(position>0,position<mCrimes.size()-1);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
             }
         });
-
-        int position = 0;
-        for (int i = 0; i < mCrimes.size(); i++) {
-            if (mCrimes.get(i).getId().equals(crimeId)) {
-                position = i;
-                break;
-            }
-        }
-        setCurrentItem(position);
     }
 
     public void setCurrentItem(int position) {
@@ -215,24 +185,12 @@ public class CrimePagerActivity extends AppCompatActivity implements ViewPager.O
         int position = mCrimes.size() - 1;
         setCurrentItem(position);
     }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        setButtonsEnable(position>0,position<mCrimes.size()-1);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
 }
+
 ```
 
 # 參考資料
 
 [Big Nerd Ranch](https://forums.bignerdranch.com/c/android-programming-the-big-nerd-ranch-guide)
+[Android Studio Release Updates](https://androidstudio.googleblog.com/)
+[Android sdkmanager](https://developer.android.com/studio/command-line/sdkmanager.html)
