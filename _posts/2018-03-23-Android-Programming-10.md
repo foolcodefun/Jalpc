@@ -94,10 +94,6 @@ public class CrimeLab {
         return new ArrayList<>(mCrimes.values());
     }
 
-    public List<Crime> getCrimes() {
-        return new ArrayList<>(mCrimes.values());
-    }
-    
     public Crime getCrime(UUID id) {
         return mCrimes.get(id);
     }
