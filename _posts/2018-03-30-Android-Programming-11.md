@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "書籍：Android Programming CH11 挑戰 (ViewPager)"
+title:  "書籍：Android Programming CH11 挑戰 (ConstrainLayout & ViewPager)"
 date:   2018-03-30
 desc: "Preference"
 keywords: "Android"
@@ -110,8 +110,7 @@ dependencies {
 }
 ```
 
-以往在排版時須用多種 Layout 組合完成，像是 LinearLayout 與 RelativeLayout 的組合，這兩個 Layout 的組合常常會造成巢狀結構，因此會有很大效能損耗。而 ConstrainLayout 使 xml 扁平化，可以達到效能提升的效果。ConstrainLayout 的使用和 RelativeLayout 有點像，但功能更為強大，比如說他有 GuideLine 功能且能以比例調整位置，在排版上用 Layout Editor 會比手打程式碼來得快。基於上述原因，在此推坑各位讀者大大。不過在使用 ConstrainLayout 時請注意他在常跟寬的設定並沒有 match_parent，但是多了個 match_constraint，match_constraint u,3
-可以用 0dp 表示。 
+以往在排版時須用多種 Layout 組合完成，像是 LinearLayout 與 RelativeLayout 的組合，這兩個 Layout 的組合常常會造成巢狀結構，因此會有很大效能損耗。而 ConstrainLayout 使 xml 扁平化，可以達到效能提升的效果。ConstrainLayout 的使用和 RelativeLayout 有點像，但功能更為強大，比如說他有 GuideLine 功能且能以比例調整位置，在排版上用 Layout Editor 會比手打程式碼來得快。基於上述原因，在此推坑各位讀者大大。不過在使用 ConstrainLayout 時請注意他在常跟寬的設定並沒有 match_parent，但是多了個 match_constraint，match_constraint 可以用 0dp 表示。 
 
 <h2 id="2.2"></h2>
 
@@ -123,7 +122,7 @@ dependencies {
 
 ### 解題想法：
 
-這題的目的是希望讀者能更熟悉 ViewPager 裡的 OnPageChangeListener 介面以及 Button 的點擊事件 (其實這也是一個介面)。以下程式碼為解題的答案。
+這題的目的是希望讀者能更熟悉 ViewPager 裡的 OnPageChangeListener 介面以及 Button 的點擊事件。以下程式碼為解題的答案。
 
 CrimePagerActivity.java
 
@@ -188,6 +187,7 @@ public class CrimePagerActivity extends AppCompatActivity{
 }
 
 ```
+上述程式碼的 `goToFirst` 和 `goToLast` 分別是兩個按鈕的點擊事件，分別會讓畫面移到第一個 Crime 和最後一個 Crime。`setButtonsEnable` 用來設定兩個按鈕是否可以被點擊，`setCurrentItem` 會讓畫面移到要的 Crime 並設定好畫面中的按鈕是否可以被點擊。
 
 # 參考資料
 
