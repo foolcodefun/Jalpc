@@ -110,7 +110,7 @@ dependencies {
 }
 ```
 
-以往在排版時須用多種 Layout 組合完成，像是 LinearLayout 與 RelativeLayout 的組合，這兩個 Layout 的組合常常會造成巢狀結構，因此會有很大效能損耗。而 ConstrainLayout 使 xml 扁平化，可以達到效能提升的效果。ConstrainLayout 的使用和 RelativeLayout 有點像，但功能更為強大，比如說他有 GuideLine 功能且能以比例調整位置，在排版上用 Layout Editor 會比手打程式碼來得快。基於上述原因，在此推坑各位讀者大大。不過在使用 ConstrainLayout 時請注意他在常跟寬的設定並沒有 match_parent，但是多了個 match_constraint，match_constraint 可以用 0dp 表示。 
+以往在排版時須用多種 Layout 組合完成，像是 LinearLayout 與 RelativeLayout 的組合，這兩個 Layout 的組合常常會造成巢狀結構，因此會有很大效的能損耗。而 ConstrainLayout 使 xml 扁平化，可以達到效能提升的效果。ConstrainLayout 的使用和 RelativeLayout 有點像，但功能更為強大，比如說他有 GuideLine 功能且能以比例調整位置，在排版上用 Layout Editor 會比手打程式碼來得快。基於上述原因，在此推坑各位讀者大大。不過在使用 ConstrainLayout 時請注意他在常跟寬的設定並沒有 match_parent，但是多了個 match_constraint，match_constraint 可以用 0dp 表示。 
 
 <h2 id="2.2"></h2>
 
