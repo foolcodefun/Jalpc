@@ -192,5 +192,7 @@ public class CrimePagerActivity extends AppCompatActivity{
 # 參考資料
 
 [Big Nerd Ranch](https://forums.bignerdranch.com/c/android-programming-the-big-nerd-ranch-guide)
+
 [Android Studio Release Updates](https://androidstudio.googleblog.com/)
+
 [Android sdkmanager](https://developer.android.com/studio/command-line/sdkmanager.html)
