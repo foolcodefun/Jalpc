@@ -519,7 +519,7 @@ public class CrimeFragment extends Fragment {
 }
 ```
 
-在不同的螢幕大小上，可對同一個資源設定不同的值，res/values/refs.xml 和 res/values-sw600dp/refs.xml 中的 date_picker 設定了不同的 string，分別是 phone 和 tablet。所以當點開 DatePicker 的點擊事件被觸發時，可以此來判斷 APP 所在的裝置是 phone 還是 tablet。至於選擇 smallest width 600 dp 為 phone 跟 tablet 的區分是根據[官方文章：Support different screen sizes](https://developer.android.com/training/multiscreen/screensizes)
+在不同的螢幕大小上，可對同一個資源設定不同的值，res/values/refs.xml 和 res/values-sw600dp/refs.xml 中的 date_picker 設定了不同的 string，分別是 phone 和 tablet。所以當點開 DatePicker 的點擊事件被觸發時，可以此來判斷 APP 所在的裝置是 phone 還是 tablet。至於選擇 smallest width 600 dp 為 phone 跟 tablet 的區分是根據[官方文章：Support different screen sizes](https://developer.android.com/training/multiscreen/screensizes)。
 
 如此一來，此挑戰也完成啦！
 
