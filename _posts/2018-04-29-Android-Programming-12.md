@@ -460,6 +460,7 @@ res/values/strings.xml
     <string name="tablet">tablet</string>
 </resources>
 xml
+```
 
 CrimeFragment.java
 
